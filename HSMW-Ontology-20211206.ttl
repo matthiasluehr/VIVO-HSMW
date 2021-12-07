@@ -1,0 +1,470 @@
+@prefix ocrer: <http://purl.org/net/OCRe/research.owl#> .
+@prefix hsmw:  <https://vivo.hs-mittweida.de/vivo/ontology/hsmw#> .
+@prefix ns:    <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix scires: <http://vivoweb.org/ontology/scientific-research#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ocresd: <http://purl.org/net/OCRe/study_design.owl#> .
+@prefix swo:   <http://www.ebi.ac.uk/efo/swo/> .
+@prefix geopolitical: <http://aims.fao.org/aos/geopolitical.owl#> .
+@prefix cito:  <http://purl.org/spar/cito/> .
+@prefix geo:   <http://aims.fao.org/aos/geopolitical.owl#> .
+@prefix kdsf-vivo: <http://lod.tib.eu/onto/kdsf/> .
+@prefix ocresst: <http://purl.org/net/OCRe/statistics.owl#> .
+@prefix terms: <http://purl.org/dc/terms/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix vivo:  <http://vivoweb.org/ontology/core#> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix vann:  <http://purl.org/vocab/vann/> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix kdsf:  <http://kerndatensatz-forschung.de/owl/Basis#> .
+@prefix c4o:   <http://purl.org/spar/c4o/> .
+@prefix study_protocol: <http://purl.org/net/OCRe/study_protocol.owl#> .
+@prefix fabio: <http://purl.org/spar/fabio/> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix skos2: <http://www.w3.org/2008/05/skos#> .
+@prefix vitro-public: <http://vitro.mannlib.cornell.edu/ns/vitro/public#> .
+@prefix core:  <http://vivoweb.org/ontology/core#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ocresp: <http://purl.org/net/OCRe/study_protocol.owl#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix vivo-de: <http://vivoweb.org/ontology/core/de#> .
+@prefix obo:   <http://purl.obolibrary.org/obo/> .
+@prefix ro:    <http://purl.obolibrary.org/obo/ro.owl#> .
+@prefix kdsf-meta: <http://kerndatensatz-forschung.de/owl/Meta#> .
+@prefix statistics: <http://purl.org/net/OCRe/statistics.owl#> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+hsmw:Doktorgrad  a       owl:Class ;
+        rdfs:label       "Doktorgrad"^^rdf:langString ;
+        rdfs:subClassOf  hsmw:Abschlussgrad .
+
+hsmw:keyWordOf  a                owl:ObjectProperty ;
+        rdfs:label               "betrifft"^^rdf:langString ;
+        vitro:displayLimitAnnot  "-1"^^xsd:int ;
+        owl:inverseOf            hsmw:hasKeyWord .
+
+hsmw:InventarNummer  a              owl:DatatypeProperty ;
+        rdfs:domain                 core:Equipment ;
+        rdfs:label                  "Inventarnummer"^^rdf:langString ;
+        rdfs:range                  xsd:string ;
+        vitro:displayRankAnnot      "10"^^xsd:int ;
+        vitro:inPropertyGroupAnnot  <http://vitro.mannlib.cornell.edu/ns/default#n3109> .
+
+hsmw:isUsedBy  a                       owl:ObjectProperty ;
+        rdfs:domain                    core:Equipment ;
+        rdfs:label                     "Verantwortlichkeit"^^rdf:langString ;
+        rdfs:range                     foaf:Person ;
+        vitro:displayLimitAnnot        "5"^^xsd:int , "-1"^^xsd:int ;
+        vitro:inPropertyGroupAnnot     <http://vivoweb.org/ontology#vitroPropertyGroupaddress> ;
+        vitro:selectFromExistingAnnot  true ;
+        owl:inverseOf                  hsmw:hasEquipment .
+
+hsmw:ac_pubs  a                  owl:Class ;
+        rdfs:label               "Autocompletion Publications (real)"^^rdf:langString ;
+        vitro:displayLimitAnnot  "-1"^^xsd:int ;
+        vitro:displayRankAnnot   "-1"^^xsd:int .
+
+hsmw:RolleDesBetreuten
+        a                owl:Class ;
+        rdfs:label       "PromovierendeR / StudierendeR"^^rdf:langString ;
+        rdfs:subClassOf  obo:BFO_0000023 .
+
+hsmw:BetreuerExtern  a              owl:DatatypeProperty ;
+        rdfs:domain                 kdsf:Qualifizierungsverfahren ;
+        rdfs:label                  "Erstbetreuer an titelvergebender Einrichtung"^^rdf:langString ;
+        rdfs:range                  xsd:string ;
+        vitro:displayRankAnnot      "50"^^xsd:int ;
+        vitro:inPropertyGroupAnnot  <http://vitro.mannlib.cornell.edu/ns/default#n3295> .
+
+hsmw:Gebrauchsmuster  a          owl:Class ;
+        rdfs:label               "Gebrauchsmuster"^^rdf:langString ;
+        rdfs:subClassOf          bibo:Patent ;
+        obo:IAO_0000115          "Gebrauchsmuster" ;
+        vitro:displayLimitAnnot  "-1"^^xsd:int ;
+        vitro:displayRankAnnot   "-1"^^xsd:int ;
+        vitro:inClassGroup       <http://vivoweb.org/ontology#vitroClassGrouppublications> .
+
+hsmw:forschenIn  a                     owl:ObjectProperty ;
+        rdfs:label                     "ForscherInnen"^^rdf:langString ;
+        vitro:displayLimitAnnot        "-1"^^xsd:int ;
+        vitro:inPropertyGroupAnnot     <http://vivoweb.org/ontology#vitroPropertyGroupresearch> , <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
+        vitro:selectFromExistingAnnot  true ;
+        owl:inverseOf                  hsmw:hatForschungsprofillinie .
+
+hsmw:wissenschaftlicheArbeit
+        a                        owl:Class ;
+        rdfs:label               "wissenschaftliche Arbeit"^^rdf:langString ;
+        vitro:displayLimitAnnot  "-1"^^xsd:int ;
+        vitro:displayRankAnnot   "-1"^^xsd:int .
+
+hsmw:acPublishers  a             owl:Class ;
+        rdfs:label               "Automcompletion Publishers"^^rdf:langString ;
+        vitro:displayLimitAnnot  "-1"^^xsd:int ;
+        vitro:displayRankAnnot   "-1"^^xsd:int .
+
+hsmw:hasKeyWord  a                     owl:ObjectProperty ;
+        rdfs:label                     "hat Schlagwort"^^rdf:langString ;
+        vitro:inPropertyGroupAnnot     <http://vitro.mannlib.cornell.edu/ns/default#n6106> ;
+        vitro:selectFromExistingAnnot  true ;
+        owl:inverseOf                  hsmw:keyWordOf .
+
+hsmw:Beirat  a              owl:Class ;
+        rdfs:label          "Beirat"^^rdf:langString ;
+        rdfs:subClassOf     foaf:Organization ;
+        vitro:inClassGroup  <http://vivoweb.org/ontology#vitroClassGrouporganizations> .
+
+hsmw:Schlagwortklassen
+        a                        owl:Class ;
+        vitro:displayLimitAnnot  "-1"^^xsd:int ;
+        vitro:displayRankAnnot   "-1"^^xsd:int .
+
+hsmw:MassMedia  a                owl:Class ;
+        rdfs:label               "Zeitung / Rundfunk / Fernsehen"^^rdf:langString ;
+        rdfs:subClassOf          hsmw:acPublishedIn ;
+        vitro:displayLimitAnnot  "-1"^^xsd:int ;
+        vitro:displayRankAnnot   "-1"^^xsd:int ;
+        vitro:inClassGroup       <http://vivoweb.org/ontology#vitroClassGrouppublications> .
+
+hsmw:externalMemberRole
+        a                        owl:Class ;
+        rdfs:label               "Externe Mitgliedschaft"^^rdf:langString ;
+        rdfs:subClassOf          core:MemberRole ;
+        obo:IAO_0000115          "Mitgliedschaft in externen Organisationen" ;
+        vitro:descriptionAnnot   "Mitgliedschaft in externen Organisationen" ;
+        vitro:displayLimitAnnot  "-1"^^xsd:int ;
+        vitro:displayRankAnnot   "-1"^^xsd:int .
+
+hsmw:hatForschungsprofillinie
+        a                              owl:ObjectProperty ;
+        rdfs:label                     "Forschungsschwerpunkt"^^rdf:langString ;
+        vitro:displayRankAnnot         "20"^^xsd:int ;
+        vitro:inPropertyGroupAnnot     <http://vitro.mannlib.cornell.edu/ns/default#n6106> ;
+        vitro:selectFromExistingAnnot  true ;
+        owl:inverseOf                  hsmw:forschenIn .
+
+hsmw:Veranstaltungsort
+        a                              owl:ObjectProperty ;
+        rdfs:domain                    event:Event ;
+        rdfs:label                     "Veranstaltungsort"^^rdf:langString ;
+        rdfs:range                     core:GeographicLocation ;
+        vitro:displayRankAnnot         "20"^^xsd:int ;
+        vitro:inPropertyGroupAnnot     <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
+        vitro:offerCreateNewOptionAnnot
+                true ;
+        vitro:selectFromExistingAnnot  true .
+
+hsmw:externalLeaderRole
+        a                        owl:Class ;
+        rdfs:label               "Führende Positionen bei anderen Einrichtungen"^^rdf:langString ;
+        rdfs:subClassOf          core:LeaderRole ;
+        obo:IAO_0000115          "Führende Positionen bei anderen Einrichtungen" ;
+        vitro:descriptionAnnot   "Führende Positionen bei anderen Einrichtungen" ;
+        vitro:displayLimitAnnot  "-1"^^xsd:int ;
+        vitro:displayRankAnnot   "-1"^^xsd:int .
+
+hsmw:FSP  a                      owl:Class ;
+        rdfs:label               "Forschungsschwerpunkt"^^rdf:langString , "Main research"^^rdf:langString ;
+        obo:IAO_0000112          "Lasertechnologien" ;
+        obo:IAO_0000115          "Forschungsschwerpunkt" ;
+        vitro:displayLimitAnnot  "-1"^^xsd:int ;
+        vitro:displayRankAnnot   "-1"^^xsd:int ;
+        vitro:inClassGroup       <http://vivoweb.org/ontology#vitroClassGrouppublications> .
+
+hsmw:Masterarbeit  a             owl:Class ;
+        rdfs:label               "Masterarbeit"^^rdf:langString ;
+        rdfs:subClassOf          hsmw:Abschlussarbeit ;
+        vitro:displayLimitAnnot  "-1"^^xsd:int ;
+        vitro:displayRankAnnot   "-1"^^xsd:int ;
+        vitro:inClassGroup       <http://vivoweb.org/ontology#vitroClassGroupactivities> .
+
+hsmw:Ausserbetriebnahme
+        a                           owl:DatatypeProperty ;
+        rdfs:domain                 core:Equipment ;
+        rdfs:label                  "Außerbetriebnahme"^^rdf:langString ;
+        rdfs:range                  xsd:date ;
+        vitro:displayRankAnnot      "30"^^xsd:int ;
+        vitro:inPropertyGroupAnnot  <http://vitro.mannlib.cornell.edu/ns/default#n3109> .
+
+hsmw:Arbeitskreis  a        owl:Class ;
+        rdfs:label          "Arbeitskreis"^^rdf:langString ;
+        rdfs:subClassOf     foaf:Organization ;
+        vitro:inClassGroup  <http://vivoweb.org/ontology#vitroClassGrouporganizations> .
+
+hsmw:acPublishedIn  a            owl:Class ;
+        rdfs:label               "Automcpletion Published In"^^rdf:langString ;
+        vitro:displayLimitAnnot  "-1"^^xsd:int ;
+        vitro:displayRankAnnot   "-1"^^xsd:int .
+
+hsmw:ac_publications  a          owl:Class ;
+        rdfs:label               "AutoCompletionPublications"^^rdf:langString ;
+        vitro:displayLimitAnnot  "-1"^^xsd:int ;
+        vitro:displayRankAnnot   "-1"^^xsd:int .
+
+hsmw:NameStudent  a                 owl:FunctionalProperty , owl:DatatypeProperty ;
+        rdfs:domain                 hsmw:Abschlussarbeit ;
+        rdfs:label                  "Name des Studierenden"^^rdf:langString ;
+        vitro:displayRankAnnot      "20"^^xsd:int ;
+        vitro:inPropertyGroupAnnot  <http://vitro.mannlib.cornell.edu/ns/default#n3295> .
+
+hsmw:Diplomarbeit  a             owl:Class ;
+        rdfs:label               "Diplomarbeit"^^rdf:langString ;
+        rdfs:subClassOf          hsmw:Abschlussarbeit ;
+        vitro:displayLimitAnnot  "-1"^^xsd:int ;
+        vitro:displayRankAnnot   "-1"^^xsd:int ;
+        vitro:inClassGroup       <http://vivoweb.org/ontology#vitroClassGroupactivities> .
+
+hsmw:ac_editorships  a           owl:Class ;
+        rdfs:label               "AutoCompletionEditorships"^^rdf:langString ;
+        vitro:displayLimitAnnot  "-1"^^xsd:int ;
+        vitro:displayRankAnnot   "-1"^^xsd:int .
+
+hsmw:vergibtTitel  a                   owl:ObjectProperty ;
+        rdfs:domain                    kdsf:Universitaet ;
+        rdfs:label                     "vergibt Titel"^^rdf:langString ;
+        rdfs:range                     kdsf:Qualifizierungsverfahren ;
+        vitro:collateBySubclassAnnot   true ;
+        vitro:displayLimitAnnot        "-1"^^xsd:int ;
+        vitro:inPropertyGroupAnnot     <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
+        vitro:selectFromExistingAnnot  true ;
+        owl:inverseOf                  hsmw:titelvergebendeUni .
+
+hsmw:Produktdaten  a                owl:FunctionalProperty , owl:DatatypeProperty ;
+        rdfs:domain                 core:Equipment ;
+        rdfs:label                  "Produktdaten"^^rdf:langString ;
+        vitro:displayRankAnnot      "10"^^xsd:int ;
+        vitro:editing               "HTML" ;
+        vitro:inPropertyGroupAnnot  <http://vitro.mannlib.cornell.edu/ns/default#n1159> .
+
+hsmw:ausgesondertesGeraet
+        a                       owl:Class ;
+        rdfs:label              "ausgesondertes Equipment"^^rdf:langString ;
+        obo:IAO_0000115         "ausgesonderte Großgeräte" ;
+        vitro:descriptionAnnot  "ausgesonderte Großgeräte" ;
+        vitro:inClassGroup      <http://vivoweb.org/ontology#vitroClassGroupequipment> .
+
+hsmw:EMailAdresseDesPromovenden
+        a                           owl:DatatypeProperty ;
+        rdfs:domain                 kdsf:Qualifizierungsverfahren ;
+        rdfs:label                  "E-Mail-Adresse des Promovenden"^^rdf:langString ;
+        rdfs:range                  xsd:string ;
+        vitro:displayRankAnnot      "30"^^xsd:int ;
+        vitro:inPropertyGroupAnnot  <http://vitro.mannlib.cornell.edu/ns/default#n3295> .
+
+hsmw:equipmentDetail  a             owl:DatatypeProperty ;
+        rdfs:domain                 core:Equipment ;
+        rdfs:label                  "Anwendungsgebiet"^^rdf:langString ;
+        vitro:editing               "HTML" ;
+        vitro:inPropertyGroupAnnot  <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+hsmw:titelvergebendeUni
+        a                              owl:ObjectProperty ;
+        rdfs:domain                    kdsf:Qualifizierungsverfahren ;
+        rdfs:label                     "Titelvergebende Einrichtung"^^rdf:langString ;
+        rdfs:range                     kdsf:Universitaet ;
+        vitro:displayRankAnnot         "45"^^xsd:int ;
+        vitro:inPropertyGroupAnnot     <http://vitro.mannlib.cornell.edu/ns/default#n3295> ;
+        vitro:offerCreateNewOptionAnnot
+                true ;
+        vitro:selectFromExistingAnnot  true ;
+        owl:inverseOf                  hsmw:vergibtTitel .
+
+hsmw:Bachelorarbeit  a           owl:Class ;
+        rdfs:label               "Bachelorarbeit"^^rdf:langString ;
+        rdfs:subClassOf          hsmw:Abschlussarbeit ;
+        vitro:displayLimitAnnot  "-1"^^xsd:int ;
+        vitro:displayRankAnnot   "-1"^^xsd:int ;
+        vitro:inClassGroup       <http://vivoweb.org/ontology#vitroClassGroupactivities> .
+
+hsmw:Veranstaltungen  a     owl:Class ;
+        rdfs:label          "Veranstaltungen"^^rdf:langString ;
+        vitro:inClassGroup  <http://vivoweb.org/ontology#vitroClassGroupevents> .
+
+hsmw:hatAutoren  a                     owl:ObjectProperty ;
+        rdfs:label                     "Autor (VIVO-Mitglied)"^^rdf:langString ;
+        rdfs:range                     owl:Thing , foaf:Person ;
+        vitro:displayLimitAnnot        "-1"^^xsd:int ;
+        vitro:inPropertyGroupAnnot     <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
+        vitro:selectFromExistingAnnot  true ;
+        owl:inverseOf                  hsmw:schreibtWissArbeit .
+
+hsmw:url  a                         owl:DatatypeProperty ;
+        rdfs:domain                 kdsf:BeitraegeInterviewsInNicht-wissenschaftlichenMedien ;
+        rdfs:label                  "URL"^^rdf:langString ;
+        rdfs:range                  xsd:anyURI ;
+        vitro:displayRankAnnot      "6"^^xsd:int ;
+        vitro:inPropertyGroupAnnot  <http://vitro.mannlib.cornell.edu/ns/default#n6106> .
+
+hsmw:Mastergrad  a       owl:Class ;
+        rdfs:label       "Mastergrad"^^rdf:langString ;
+        rdfs:subClassOf  hsmw:Abschlussgrad .
+
+hsmw:Bachelorgrad  a     owl:Class ;
+        rdfs:label       "Bachelorgrad"^^rdf:langString ;
+        rdfs:subClassOf  hsmw:Abschlussgrad .
+
+hsmw:FakultaetHatProjekt
+        a                              owl:ObjectProperty ;
+        rdfs:domain                    vivo-de:Fakultaet ;
+        rdfs:label                     "Drittmittelprojekte"^^rdf:langString ;
+        rdfs:range                     kdsf:Drittmittelprojekt ;
+        vitro:inPropertyGroupAnnot     <http://vivoweb.org/ontology#vitroPropertyGroupresearch> ;
+        vitro:selectFromExistingAnnot  true .
+
+hsmw:Diplomgrad  a       owl:Class ;
+        rdfs:label       "Diplomgrad"^^rdf:langString ;
+        rdfs:subClassOf  hsmw:Abschlussgrad .
+
+hsmw:HsMittweida  a              owl:Class ;
+        rdfs:label               "HsMittweida"^^rdf:langString ;
+        vitro:displayLimitAnnot  "-1"^^xsd:int ;
+        vitro:displayRankAnnot   "-1"^^xsd:int ;
+        vitro:isMenuPageIntersectionClass
+                "true" .
+
+hsmw:NameDesPromovenden
+        a                           owl:DatatypeProperty ;
+        rdfs:domain                 kdsf:Qualifizierungsverfahren ;
+        rdfs:label                  "Name des Promovenden"^^rdf:langString ;
+        rdfs:range                  xsd:string ;
+        vitro:displayRankAnnot      "20"^^xsd:int ;
+        vitro:inPropertyGroupAnnot  <http://vitro.mannlib.cornell.edu/ns/default#n3295> .
+
+hsmw:lookupName  a  owl:DatatypeProperty ;
+        rdfs:range  xsd:string .
+
+hsmw:Messe  a               owl:Class ;
+        rdfs:label          "Messe"^^rdf:langString ;
+        rdfs:subClassOf     hsmw:Veranstaltungen , event:Event , hsmw:acPresentedAt ;
+        vitro:inClassGroup  <http://vivoweb.org/ontology#vitroClassGroupevents> .
+
+hsmw:Abschlussarbeit  a          owl:Class ;
+        rdfs:label               "Abschlussarbeit"^^rdf:langString ;
+        rdfs:subClassOf          hsmw:wissenschaftlicheArbeit , foaf:Person , hsmw:acPresentedAt ;
+        vitro:displayLimitAnnot  "-1"^^xsd:int ;
+        vitro:displayRankAnnot   "-1"^^xsd:int .
+
+hsmw:EndeWissArbeit  a              owl:FunctionalProperty , owl:DatatypeProperty ;
+        rdfs:domain                 hsmw:wissenschaftlicheArbeit ;
+        rdfs:label                  "Abschlussdatum"^^rdf:langString ;
+        rdfs:range                  xsd:date ;
+        vitro:displayRankAnnot      "40"^^xsd:int ;
+        vitro:inPropertyGroupAnnot  <http://vivoweb.org/ontology#vitroPropertyGrouptime> .
+
+hsmw:hsmwprojectno  a               owl:FunctionalProperty , owl:DatatypeProperty ;
+        rdfs:domain                 kdsf:Drittmittelprojekt ;
+        rdfs:label                  "Projektnummer"^^rdf:langString ;
+        vitro:inPropertyGroupAnnot  <http://vitro.mannlib.cornell.edu/ns/default#n848> .
+
+hsmw:Inbetriebnahme  a              owl:DatatypeProperty ;
+        rdfs:domain                 core:Equipment ;
+        rdfs:label                  "Inbetriebnahme"^^rdf:langString ;
+        rdfs:range                  xsd:date ;
+        vitro:displayRankAnnot      "20"^^xsd:int ;
+        vitro:inPropertyGroupAnnot  <http://vitro.mannlib.cornell.edu/ns/default#n3109> .
+
+hsmw:RolleDesBetreuers
+        a                owl:Class ;
+        rdfs:label       "ErstbetreuerIn der Hochschule Mittweida"^^rdf:langString ;
+        rdfs:subClassOf  obo:BFO_0000023 , core:AdvisorRole .
+
+hsmw:StartWissArbeit  a             owl:DatatypeProperty ;
+        rdfs:domain                 hsmw:wissenschaftlicheArbeit ;
+        rdfs:label                  "Startdatum"^^rdf:langString ;
+        rdfs:range                  xsd:date ;
+        vitro:inPropertyGroupAnnot  <http://vivoweb.org/ontology#vitroPropertyGrouptime> .
+
+hsmw:LenkKreis  a           owl:Class ;
+        rdfs:label          "Lenkungskreis"^^rdf:langString ;
+        rdfs:subClassOf     foaf:Organization ;
+        vitro:inClassGroup  <http://vivoweb.org/ontology#vitroClassGrouporganizations> .
+
+hsmw:FachbereichHatProjekt
+        a                              owl:ObjectProperty ;
+        rdfs:domain                    core:AcademicDepartment ;
+        rdfs:label                     "Drittmittelprojekte"^^rdf:langString ;
+        rdfs:range                     kdsf:Drittmittelprojekt ;
+        vitro:inPropertyGroupAnnot     <http://vivoweb.org/ontology#vitroPropertyGroupresearch> ;
+        vitro:selectFromExistingAnnot  true .
+
+hsmw:createdAt  a                   owl:DatatypeProperty ;
+        rdfs:label                  "Erstellungsdatum"^^rdf:langString ;
+        rdfs:range                  xsd:date ;
+        vitro:inPropertyGroupAnnot  <http://vitro.mannlib.cornell.edu/ns/default#n3109> .
+
+hsmw:modifiedAt  a                  owl:DatatypeProperty ;
+        rdfs:label                  "Änderungsdatum"^^rdf:langString ;
+        rdfs:range                  xsd:date ;
+        vitro:inPropertyGroupAnnot  <http://vitro.mannlib.cornell.edu/ns/default#n3109> .
+
+hsmw:aEditors  a                 owl:Class ;
+        rdfs:label               "Autocompletion  Editors"^^rdf:langString ;
+        vitro:displayLimitAnnot  "-1"^^xsd:int ;
+        vitro:displayRankAnnot   "-1"^^xsd:int .
+
+hsmw:acPresentedAt  a            owl:Class ;
+        rdfs:label               "Autocompleter Presented At"^^rdf:langString ;
+        vitro:displayLimitAnnot  "-1"^^xsd:int ;
+        vitro:displayRankAnnot   "-1"^^xsd:int .
+
+hsmw:Abschlussgrad  a  owl:Class ;
+        rdfs:label  "Abschlussgrad"^^rdf:langString .
+
+hsmw:ThemaDerArbeit  a              owl:DatatypeProperty ;
+        rdfs:domain                 hsmw:wissenschaftlicheArbeit ;
+        rdfs:label                  "Thema der Arbeit"^^rdf:langString ;
+        vitro:displayRankAnnot      "10"^^xsd:int ;
+        vitro:inPropertyGroupAnnot  <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+hsmw:schreibtWissArbeit
+        a                              owl:ObjectProperty ;
+        rdfs:domain                    foaf:Person , owl:Thing ;
+        rdfs:label                     "Wissenschaftliche Arbeiten"^^rdf:langString ;
+        vitro:collateBySubclassAnnot   true ;
+        vitro:displayLimitAnnot        "-1"^^xsd:int ;
+        vitro:inPropertyGroupAnnot     <http://vitro.mannlib.cornell.edu/ns/default#n6106> , <http://vitro.mannlib.cornell.edu/ns/default#n6317> ;
+        vitro:offerCreateNewOptionAnnot
+                true ;
+        vitro:selectFromExistingAnnot  true ;
+        owl:inverseOf                  hsmw:hatAutoren .
+
+hsmw:hasEquipment  a                   owl:ObjectProperty ;
+        rdfs:domain                    foaf:Person ;
+        rdfs:label                     "Equipment"^^rdf:langString ;
+        rdfs:range                     core:Equipment ;
+        vitro:inPropertyGroupAnnot     <http://vivoweb.org/ontology#vitroPropertyGroupoutreach> ;
+        vitro:offerCreateNewOptionAnnot
+                true ;
+        vitro:selectFromExistingAnnot  true ;
+        owl:inverseOf                  hsmw:isUsedBy .
+
+hsmw:equipmentNutzung
+        a                           owl:DatatypeProperty ;
+        rdfs:domain                 core:Equipment ;
+        rdfs:label                  "Nutzungsbedingung"^^rdf:langString ;
+        vitro:editing               "HTML" ;
+        vitro:inPropertyGroupAnnot  <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+hsmw:PromoStatus  a                 owl:DatatypeProperty ;
+        rdfs:domain                 kdsf:Qualifizierungsverfahren ;
+        rdfs:label                  "Promovendenstatus"^^rdf:langString ;
+        rdfs:range                  xsd:boolean ;
+        vitro:inPropertyGroupAnnot  <http://vitro.mannlib.cornell.edu/ns/default#n3109> .
+
+hsmw:   a                          owl:Ontology ;
+        rdfs:label                 "HSMW"^^rdf:langString ;
+        vitro:ontologyPrefixAnnot  "hsmw" .
+
+hsmw:strukturnummer  a              owl:FunctionalProperty , owl:DatatypeProperty ;
+        rdfs:domain                 foaf:Organization ;
+        rdfs:label                  "Strukturnummer"^^rdf:langString ;
+        rdfs:range                  xsd:string ;
+        vitro:inPropertyGroupAnnot  <http://vitro.mannlib.cornell.edu/ns/default#n3109> .
+
+hsmw:authorName  a                  owl:DatatypeProperty ;
+        rdfs:label                  "Autor (nicht VIVO-Mitglied)"^^rdf:langString ;
+        rdfs:range                  xsd:string ;
+        vitro:inPropertyGroupAnnot  <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
