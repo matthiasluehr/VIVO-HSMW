@@ -1,1 +1,1 @@
-# VIVO-HSMW
+# VIVO-HSMW: Equipment
