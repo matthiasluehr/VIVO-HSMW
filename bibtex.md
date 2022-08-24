@@ -177,28 +177,44 @@ PREFIX vivo-de: <http://vivoweb.org/ontology/core/de#>
 * requires the small package *bib-utils* for converting from BibTex to XML or RIS
 
 ```
-def my_bibtex
-        @user = NdbUser.find_by_login(request.env['REMOTE_USER']) unless @user
-
-        base_url = 'https://vivo-development.hs-mittweida.de/vivo/api/dataRequest/'
+    def export_publications
+        base_url = 'https://vivo.hs-mittweida.de/vivo/api/dataRequest/'
 
         # publication base
         action = 'publications_by_author'
         
         # the uri of the author
-        authorUri = @user.vivo_uri.gsub(/[\<\>]/, '')
-        puts authorUri
+        authorUri = params[:uri]
+        filename = params[:name].gsub(/ /, '')
 
-        # type mappings VIVO -> BibTex . TODO: complete the list
+        # type mappings VIVO -> BibTex
         type_mappings =  {
+                "http://kerndatensatz-forschung.de/version1.2/technisches_datenmodell/owl/Basis#ArbeitspapierForschungsbericht" => "techreport",
+                "http://kerndatensatz-forschung.de/version1.2/technisches_datenmodell/owl/Basis#BeitragInWissenschaftlichenBlogs" => "misc",
+                "http://kerndatensatz-forschung.de/version1.2/technisches_datenmodell/owl/Basis#BeitraegeInterviewsInNicht-wissenschaftlichenMedien" => "misc",
+                "http://kerndatensatz-forschung.de/version1.2/technisches_datenmodell/owl/Basis#Bibliographie" => "book",
+                "http://kerndatensatz-forschung.de/version1.2/technisches_datenmodell/owl/Basis#Editorial" => "inbook",
+                "http://kerndatensatz-forschung.de/version1.2/technisches_datenmodell/owl/Basis#Forschungsdaten" => "misc",
+                "http://kerndatensatz-forschung.de/version1.2/technisches_datenmodell/owl/Basis#Dissertation" => "phdthesis",
+                "http://kerndatensatz-forschung.de/version1.2/technisches_datenmodell/owl/Basis#Journalartikel" => "incollection",
+                "http://kerndatensatz-forschung.de/version1.2/technisches_datenmodell/owl/Basis#Konferenzpaper" => "conference",
+                "http://kerndatensatz-forschung.de/version1.2/technisches_datenmodell/owl/Basis#Konferenzposter" => "conference",
+                "http://kerndatensatz-forschung.de/version1.2/technisches_datenmodell/owl/Basis#LetterToTheEditor" => "misc",
+                "http://kerndatensatz-forschung.de/version1.2/technisches_datenmodell/owl/Basis#MeetingAbstract" => "misc",
+                "http://kerndatensatz-forschung.de/version1.2/technisches_datenmodell/owl/Basis#Monographie" => "book",
+                "http://kerndatensatz-forschung.de/version1.2/technisches_datenmodell/owl/Basis#Preprint" => "unpublished",
+                "http://kerndatensatz-forschung.de/version1.2/technisches_datenmodell/owl/Basis#Quellenedition" => "misc",
+                "http://kerndatensatz-forschung.de/version1.2/technisches_datenmodell/owl/Basis#Review" => "misc",
+                "http://kerndatensatz-forschung.de/version1.2/technisches_datenmodell/owl/Basis#Rezension" => "misc",
                 "http://kerndatensatz-forschung.de/version1.2/technisches_datenmodell/owl/Basis#Sammelbandbeitrag" => "incollection",
-                "http://kerndatensatz-forschung.de/version1.2/technisches_datenmodell/owl/Basis#WissenschaftlicheVortragsfolien" => "inproceedings",
+                "http://kerndatensatz-forschung.de/version1.2/technisches_datenmodell/owl/Basis#Software" => "misc",
+                "http://kerndatensatz-forschung.de/version1.2/technisches_datenmodell/owl/Basis#WissenschaftlicheVortragsfolien" => "inproceedings"
         }
         
         # mappings attribute VIVO -> BibTex
         attribute_mappings = {
             "publicationYear" => "year",
-            "authorName" => "author",
+#            "authorName" => "author",
             "label" => "title" ,
             "publishedIn" => "booktitle",
             "volume" => "volume",
@@ -216,33 +232,65 @@ def my_bibtex
         response = RestClient::Request.execute method: 'GET', url: base_url + action + "?theAuthor=" + authorUri
         response = JSON::parse(response)
         
+        @contents = ""
         if response["results"] && response["results"]["bindings"] then
             
-            result = ""
             response["results"]["bindings"].each do |publication|
         
                 if type_mappings.has_key?(publication["type"]["value"]) then
                     
                     document_type = type_mappings[publication["type"]["value"]]
         
-                    citation = publication["uri"]["value"].gsub(/[^A-Za-z0-9]/, '').upcase
+                    citation = 'VIVOHSMW-' + publication["uri"]["value"].split(/\//).pop.upcase
                 
-                    result += "@" + document_type + "{" + citation + ",\n"
-        
+                    @contents += "@" + document_type + "{" + citation + ",\n"
+
+                    @contents += "\tauthor = \"" + publication["authorName"]["value"].gsub(/; /, ' and ') + "\",\n"
+
                     attribute_mappings.each do |k, v|
         
                         if publication.has_key?(k) then
-                            result += "\t" + v + " = \"" + publication[k]["value"] + "\",\n" 
+                            @contents += "\t" + v + " = \"" + publication[k]["value"] + "\",\n" 
                         end
         
                     end
+                    
+                    if publication["startPage"] && publication["endPage"] then
+                        @contents += "\tpages = \"" + publication["startPage"]["value"] + " - " + publication["endPage"]["value"] + "\",\n"
+                    end
         
-                    result += "}\n\n"
+                    @contents += "}\n\n"
                 end
             end
-        
-            render :text => result, :content_type => "text/html"
+            
+	    if @contents != "" then
+                bibfile = Tempfile.new('bibfile')
+                modsfile = Tempfile.new('modsfile')
+                xmlfile = Tempfile.new('xmfile')
+                risfile = Tempfile.new('risfile')
+                bib2mods = '/usr/bin/bib2xml ' + bibfile.path + ' >' + modsfile.path
+                mod2xml = '/usr/bin/xml2wordbib ' + modsfile.path + ' >' + xmlfile.path
+                mod2ris = '/usr/bin/xml2ris ' + modsfile.path + ' >' + risfile.path
+                bibfile.puts(@contents)
+                bibfile.close
+                system(bib2mods)
+                if params[:format] && params[:format] == 'word'
+                    fname = filename + ".xml"
+                    system(mod2xml)
+                    @contents = xmlfile.open.read
+                elsif params[:format] && params[:format] == 'ris'
+                    fname = filename + ".ris"
+                    system(mod2ris)
+                    @contents = risfile.open.read
+                else
+                    fname = filename + ".bib"
+                end
+            end
         end
+    
+        if params[:file] then
+            send_data @contents, filename: fname and return
+        end
+    
     end
-
 ```
