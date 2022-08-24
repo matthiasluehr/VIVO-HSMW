@@ -1,3 +1,16 @@
+### Archictecture
+
+```mermaid
+
+sequenceDiagram
+    Web Client->>IDM: Get bibliographical data
+    IDM->>VIVO: send request to VIVO's Data Distribution API
+    VIVO->>IDM: deliver JSON data
+    IDM->>Web Client: convert JSON to BibTex, XML or RIS and send back to client
+
+
+```
+
 ## Data Distribution API
 
 ```sql
