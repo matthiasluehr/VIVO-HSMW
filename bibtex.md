@@ -294,3 +294,30 @@ PREFIX vivo-de: <http://vivoweb.org/ontology/core/de#>
     
     end
 ```
+## Freemarker Template thingies
+
+In *individual--foaf-person.ftl*
+
+```html
+                                                     <form action="https://ndbapi.hs-mittweida.de/v1/vivo/export_publications" style="display: inline-block;">
+                                                                <input type="hidden" name="uri" value="${individual.uri}">
+                                                                <input type="hidden" name="name" value="${individual.name}">
+                                                                <input type="hidden" name="format" value="word">
+                                                                <input type="hidden" name="file" value="1">
+                                                                <input type="submit" class="submit" value="Word XML" />
+                                                        </form>
+                                                        <form action="https://ndbapi.hs-mittweida.de/v1/vivo/export_publications" style="display: inline-block;">
+                                                                <input type="hidden" name="uri" value="${individual.uri}">
+                                                                <input type="hidden" name="name" value="${individual.name}">
+                                                                <input type="hidden" name="file" value="1">
+                                                                <input type="submit" class="submit" value="BibTeX" />
+                                                        </form>
+                                                        <form action="https://ndbapi.hs-mittweida.de/v1/vivo/export_publications" style="display: inline-block;">
+                                                                <input type="hidden" name="uri" value="${individual.uri}">
+                                                                <input type="hidden" name="name" value="${individual.name}">
+                                                                <input type="hidden" name="format" value="ris">
+                                                                <input type="hidden" name="file" value="1">
+                                                                <input type="submit" class="submit" value="RIS" />
+                                                        </form>
+                                                        <span class="hsmw-help-smaller" style="padding-left: 0px; margin-top: 8px; margin-left: 12px; height: 24px;"><a href="https://vivo.hs-mittweida.de/tutorials/20-export-eigener-publikationslisten/" class="hsmw-help" style="font-size: 16px;" onclick="window.open(this.href, 'Hilfe Export Publikationslisten', 'width=600,height=400,left=1100,top=300'); return false" title="Hilfe zum Export der Publikationslisten">?</a></span>
+```
