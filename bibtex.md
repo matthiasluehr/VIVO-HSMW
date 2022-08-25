@@ -173,7 +173,7 @@ PREFIX vivo-de: <http://vivoweb.org/ontology/core/de#>
 
 * inside a RoR application
 * at the moment inside a specific controller (VivoController) as part of the IDM's REST API
-* natively generates BibTex from deliverd JSON
+* natively generates BibTex from delivered JSON
 * requires the small package *bib-utils* for converting from BibTex to XML or RIS
 
 ```
