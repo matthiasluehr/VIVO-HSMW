@@ -48,7 +48,7 @@ Bemerkung: funktioniert so nicht wie angegeben in der Dokumentation. Man kann ab
 curl Aufruf:
 
 ```shell
-curl -i -d 'email=vivo@hs-mittweida.de' -d 'password=Mond987' -d '@insert.sparql' 'https://vivo.hs-mittweida.de/vivo/api/sparqlUpdate'
+curl -i -d 'email=vivo@hs-mittweida.de' -d 'password=XXXX' -d '@insert.sparql' 'https://vivo.hs-mittweida.de/vivo/api/sparqlUpdate'
 ```
 
 ## Dokumentation Patent-Ontology
