@@ -81,3 +81,53 @@ graph TD
     F--vivo:relates-->G
     I--vivo:relates-->H
 ```
+
+Faux Properties:
+
+Aus  http://vitro.mannlib.cornell.edu/default/vitro-kb-displayMetadata :
+
+```
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/fp1982>
+        a                        <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#ObjectPropertyDisplayConfig> ;
+        vitro:displayLimitAnnot  0 ;
+        vitro:displayRankAnnot   0 ;
+        <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName>
+                "hat Erfinder" ;
+        <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#listViewConfigFile>
+                "listViewConfig-inventor.xml" ;
+        <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#propertyGroup>
+                <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/fp2015>
+        a       <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#ConfigContext> ;
+        <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#configContextFor>
+                vivo:relates ;
+        <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#hasConfiguration>
+                <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/fp1982> ;
+        <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#qualifiedBy>
+                hsmw:RolleDesErfinders ;
+        <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#qualifiedByDomain>
+                hsmw:Schutzrecht .
+
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/fp1263>
+        a                        <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#ObjectPropertyDisplayConfig> ;
+        vitro:displayLimitAnnot  0 ;
+        vitro:displayRankAnnot   0 ;
+        <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName>
+                "hat erfunden" ;
+        <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#listViewConfigFile>
+                "listViewConfig-invention.xml" ;
+        <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#propertyGroup>
+                <http://vivoweb.org/ontology#vitroPropertyGroupresearch> .
+
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/fp1273>
+        a       <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#ConfigContext> ;
+        <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#configContextFor>
+                vivo:relatedBy ;
+        <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#hasConfiguration>
+                <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/fp1263> ;
+        <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#qualifiedBy>
+                hsmw:RolleDesErfinders ;
+        <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#qualifiedByDomain>
+                foaf:Person .
+```
