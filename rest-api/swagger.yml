@@ -1,0 +1,42 @@
+openapi: '3.0.3'
+info:
+  version: 0.0.3
+  title: VIVO REST API
+  description: 'A REST API that provides read access to VIVO objects'
+  contact:
+    name: Matthias Lühr
+    url:  https://www.staff.hs-mittweida.de/luehr/koken
+    email: luehr@hs-mittweida.de
+  license:
+    name: MIT
+    url: http://opensource.org/licenses/MIT
+servers:
+    - url: https://vivo-rest-api.hs-mittweida.de/v1/
+      description: The one and only
+paths:
+  /users/{id}:
+    get:
+      summary: get VIVO ID of a given user (account name)
+      responses:
+        200:
+          description: OK.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  uri:
+                    type: string
+                  api_uri:
+                    type: string
+        404:
+          description: User not found.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: User's account name.
