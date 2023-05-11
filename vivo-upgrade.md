@@ -5,3 +5,16 @@
 * Datenbank importieren
 * Data Getter übernehmen
 * Theme installieren 
+
+--------------------------------------
+eigene Features:
+
+* last Changes
+* Mentoring
+* Bearbeiten von Publikationen
+
+Features von TIB etc.:
+* ARM
+* User Auditing
+* extended Search
+* modifizierter Claimer
