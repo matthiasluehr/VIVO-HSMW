@@ -1,5 +1,27 @@
 # Mentoring Model
 
+## Classes
+
+```mermaid
+flowchart TD
+    A[hsmw:wissenschaftlicheArbeit]
+    B[hsmw:AbschlussArbeit]
+    C[hsmw:Bachelor]
+    D[hsmw:Diplom]
+    E[hsmw:Master]
+    F[obo:Role]
+    G[hsmw:AdvisorRole]
+    H[hsmw:AdviseeRole]
+
+    A-->B
+    B-->C
+    B-->D
+    B-->E
+
+    F-->G
+    F-->H
+```
+
 ## Relations
 
 ```mermaid
