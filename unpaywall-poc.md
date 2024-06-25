@@ -12,10 +12,10 @@ sequenceDiagram
         A->>B: DOI
 
         note right of B: GET api,unpaywall.org/v2/<doi>
-        B->>C: Tell me about about DOI
+        B->>C: Fetch information from unpaywall
 
         alt 200
-            C->>B: Non abbiamo troviato niente!
+            C->>B: Niente!
         else 404
             C->>B: JSON 
             note right of B:  {"doi"=>"10.1007/s00339-023-06949-8", ... "is_oa"=>true, "oa_status"=>"hybrid" }
