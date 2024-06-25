@@ -1,3 +1,31 @@
+```mermaid
+sequenceDiagram
+    participant A as VIVO / SPARQL Query and Update API
+    participant B as Script
+    participant C as Unpaywall API
+
+
+    B->>A: Tell me all publications that have an DOI and no Open Access information
+    note left of B: SELECT doi WHERE { ... } 
+
+    loop List of publications
+        A->>B: DOI
+
+        note right of B: GET api,unpaywall.org/v2/<doi>
+        B->>C: Tell me about about DOI
+
+        alt 200
+            C->>B: Non abbiamo troviato niente!
+        else 404
+            C->>B: JSON 
+            note right of B:  {"doi"=>"10.1007/s00339-023-06949-8", ... "is_oa"=>true, "oa_status"=>"hybrid" }
+            B->>A: Triples
+            note left of B:  <https://vivo.hs-mittweida.de/vivo/individual/n21684> <http://lod.tib.eu/onto/vivo-oa/has_access>  <http://lod.tib.eu/onto/vivo-oa/Open_Access_Hybrid> .
+        end
+    end
+
+```
+
 Example script for querying unpaywall API:
 
 ```ruby
